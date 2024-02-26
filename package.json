@@ -1,0 +1,12 @@
+// package.json
+
+{
+    "scripts": {
+      "lint": "eslint .",
+      "check-format": "prettier --check \"src/**/*.{ts,tsx,js}\"",
+      "static-code-analysis": "yarn lint && yarn check-format",
+      "dynamic-code-analysis": "jest --coverage"
+    }
+  }
+  
+  

@@ -1,0 +1,35 @@
+# .gitlab-ci.yml
+
+image: node:latest
+
+stages:
+  - Code Quality
+  - Build
+  - Deploy
+
+code_quality:
+  stage: Code Quality
+  script:
+    - npm install
+    - npm run static-code-analysis
+    - npm run dynamic-code-analysis
+  only:
+    - merge_requests
+
+build:
+  stage: Build
+  script:
+    - npm install
+    - npm run build
+  only:
+    - merge_requests
+
+deploy:
+  stage: Deploy
+  script:
+    - npm install
+    - npm run build
+    - git remote add dokku dokku@<server-host>:my-app
+    - git push dokku main
+  only:
+    - main
